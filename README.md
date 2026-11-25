@@ -10,13 +10,12 @@ Sistem pot pintar berbasis Internet of Things (IoT) untuk pemantauan kondisi lin
 **Program Studi Informatika, UPN "Veteran" Yogyakarta**  
 Tahun Ajaran 2026/2027  
 
-| No | Nama Lengkap | NIM | Kelas Asal |
+| No | Nama Lengkap | NIM |
 |:--:|:---|:---:|:---:|
-| 1 | **Azarya Shalom Widura** | 123240232 | IF-B |
-| 2 | **Iva Rohmanto** | 123240252 | IF-B |
-| 3 | **Muhammad Fatkhan Kurniadi** | 123240253 | IF-A |
-| 4 | **Ajrun Ramadhan** | 123240254 | IF-A |
-
+| 1 | **Azarya Shalom Widura** | 123240232 | 
+| 2 | **Iva Rohmanto** | 123240252 | 
+| 3 | **Muhammad Fatkhan Kurniadi** | 123240253 | 
+| 4 | **Ajrun Ramadhan** | 123240254 | 
 ---
 
 ## Deskripsi Singkat Proyek
