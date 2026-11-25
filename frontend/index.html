@@ -1,0 +1,683 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <title>PlantCare - Smart Plant Care Pot</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- Ambient Botanical Background Tint -->
+  <div class="ambient-canvas-bg" aria-hidden="true">
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+    <div class="ambient-orb orb-3"></div>
+    <svg class="ambient-abstract-lines" viewBox="0 0 1440 900" fill="none" preserveAspectRatio="none">
+      <path d="M-100 220 C 320 140, 620 460, 1080 200 C 1300 90, 1500 240, 1620 220" stroke="#a7f3d0" stroke-width="2" opacity="0.45"/>
+      <path d="M-60 480 C 380 370, 720 720, 1220 420 C 1380 310, 1540 460, 1660 430" stroke="#a7f3d0" stroke-width="1.8" stroke-dasharray="6 6" opacity="0.35"/>
+    </svg>
+  </div>
+
+  <!-- App Main Layout: Sidebar + Main Content -->
+  <div class="app-layout">
+
+    <!-- ================= 1. LEFT SIDEBAR NAVIGATION ================= -->
+    <aside class="sidebar" id="sidebar">
+      <!-- Brand Header -->
+      <div class="sidebar-brand">
+        <div class="brand-logo-icon">
+          <svg class="sway-leaf" viewBox="0 0 24 24" width="22" height="22" fill="none">
+            <path d="M12 22v-8m0 0C12 7 7 4 3 5c0 5 4 9 9 9zm0 0c0-7 5-10 9-9 0 5-4 9-9 9z" stroke="#10b981" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1 class="brand-title">PlantCare</h1>
+          <span class="brand-subtitle">Smart Pot</span>
+        </div>
+      </div>
+
+      <!-- Navigation Menu: 4 Menu Terpisah & Sederhana -->
+      <nav class="sidebar-menu" aria-label="Navigasi Utama">
+        <!-- Menu 1: Dashboard -->
+        <a class="nav-item active" href="#dashboard" data-tab="dashboard">
+          <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+            <rect x="3" y="3" width="7.5" height="7.5" rx="2.5"/>
+            <rect x="13.5" y="3" width="7.5" height="7.5" rx="2.5"/>
+            <rect x="3" y="13.5" width="7.5" height="7.5" rx="2.5"/>
+            <rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2.5"/>
+          </svg>
+          <span>Dashboard</span>
+        </a>
+
+        <!-- Menu 2: Kontrol Pompa -->
+        <a class="nav-item" href="#control" data-tab="control">
+          <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2v6m0 0a4 4 0 1 1-4 0V2"/>
+            <circle cx="12" cy="14" r="2.5"/>
+            <path d="M12 16.5v4.5"/>
+          </svg>
+          <span>Kontrol Pompa</span>
+        </a>
+
+        <!-- Menu 3: Pengaturan Ambang -->
+        <a class="nav-item" href="#settings" data-tab="settings">
+          <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="4" y1="21" x2="4" y2="14"/>
+            <line x1="4" y1="10" x2="4" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="12"/>
+            <line x1="12" y1="8" x2="12" y2="3"/>
+            <line x1="20" y1="21" x2="20" y2="16"/>
+            <line x1="20" y1="12" x2="20" y2="3"/>
+            <circle cx="4" cy="12" r="2.5" fill="currentColor"/>
+            <circle cx="12" cy="10" r="2.5" fill="currentColor"/>
+            <circle cx="20" cy="14" r="2.5" fill="currentColor"/>
+          </svg>
+          <span>Pengaturan Ambang</span>
+        </a>
+
+        <!-- Menu 4: Riwayat Log -->
+        <a class="nav-item" href="#history" data-tab="history">
+          <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="4"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+            <circle cx="8" cy="15" r="1.2" fill="currentColor"/>
+            <circle cx="12" cy="15" r="1.2" fill="currentColor"/>
+            <circle cx="16" cy="15" r="1.2" fill="currentColor"/>
+          </svg>
+          <span>Riwayat Log</span>
+        </a>
+      </nav>
+
+      <!-- Sidebar Bottom: User Profile & Logout -->
+      <div class="sidebar-bottom">
+        <div class="sidebar-user-card">
+          <div class="sidebar-avatar" id="topbarUserInitial">U</div>
+          <div class="sidebar-user-info">
+            <span class="sidebar-user-name" id="userName">User</span>
+            <span class="sidebar-conn-status" id="sideConnection">Online</span>
+          </div>
+          <button type="button" class="sidebar-logout-btn" id="logoutBtn" title="Keluar dari akun">
+            <svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M7 17l-5-5 5-5M2 12h11M13 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Overlay backdrop for mobile sidebar -->
+    <div class="mobile-sidebar-overlay" id="mobileSidebarOverlay"></div>
+
+    <!-- ================= 2. MAIN CENTER CONTENT WRAPPER ================= -->
+    <div class="main-wrapper">
+
+      <!-- Top Header Bar: Clean & Minimal -->
+      <header class="top-header">
+        <div class="top-header-left">
+          <button type="button" class="hamburger-btn" id="hamburgerBtn" aria-label="Buka Menu">
+            <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" fill="none" stroke-width="2.2" stroke-linecap="round">
+              <line x1="4" y1="6" x2="20" y2="6"/>
+              <line x1="4" y1="12" x2="20" y2="12"/>
+              <line x1="4" y1="18" x2="20" y2="18"/>
+            </svg>
+          </button>
+          <div class="mobile-brand-pill">
+            <svg class="sway-leaf" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#10b981" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22v-9"/>
+              <path d="M12 13a5 5 0 0 0 5-5c0-4-5-6-5-6s-5 2-5 6a5 5 0 0 0 5 5z"/>
+            </svg>
+            <strong>PlantCare</strong>
+          </div>
+        </div>
+
+        <div class="top-header-right">
+          <!-- Connection Status Pill -->
+          <div class="status-pill" id="connectionPill" title="Status Koneksi ESP32">
+            <span class="pulse-dot offline" id="topDot"></span>
+            <span id="connectionText">Memuat...</span>
+          </div>
+
+          <!-- Notification Bell & Panel -->
+          <div class="notif-anchor">
+            <button type="button" class="icon-round-btn" id="notifBtn" aria-label="Notifikasi" title="Notifikasi">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+              </svg>
+              <span class="notif-badge hidden" id="notifBadge">0</span>
+            </button>
+            <div class="notif-panel" id="notifPanel">
+              <div class="notif-panel-header">
+                <h4>Notifikasi</h4>
+                <button type="button" class="clear-notif-btn" id="clearNotifBtn">Hapus</button>
+              </div>
+              <div id="notifList" class="notif-list"></div>
+              <p id="notifEmpty" class="notif-empty">Tidak ada notifikasi baru.</p>
+            </div>
+          </div>
+
+          <!-- Add Pot Button -->
+          <button type="button" class="btn-add-pot" id="openClaimBtn" onclick="openClaimModal()" title="Tambah Pot Baru">
+            <span>+</span> Tambah Pot
+          </button>
+        </div>
+      </header>
+
+
+      <!-- ================= 3. SEPARATE VIEW PANES ================= -->
+      <main class="app-main-views">
+
+        <!-- ================= VIEW 1: DASHBOARD (LENGKAP DENGAN SENSOR & GRAFIK) ================= -->
+        <section class="tab-pane active" id="view-dashboard">
+          <!-- Greeting Header -->
+          <div class="greeting-header">
+            <h2 class="greeting-title" id="greetingTitle">Good Morning</h2>
+            <p class="greeting-subtitle">Berikut adalah ringkasan status pot pintar dan sensor tanaman Anda.</p>
+          </div>
+
+          <!-- 3 Large Summary Metric Cards (Kelembapan, Cahaya, dan Status Pompa Air) -->
+          <div class="summary-cards-row" style="margin-top: 20px;">
+            <!-- Card 1: KELEMBAPAN TANAH -->
+            <div class="summary-card">
+              <div class="summary-icon-circle mint-circle">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="none">
+                  <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="#059669" fill-opacity="0.2"/>
+                  <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M9.5 12a3.5 3.5 0 0 0 3.5 3.5" stroke="#059669" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="summary-text-box">
+                <span class="summary-label">KELEMBAPAN TANAH</span>
+                <strong class="summary-value" id="summaryWaterText"><span id="humidityValue">--%</span> (<span id="activeWaterStatus">Optimal</span>)</strong>
+                <span class="summary-sub" id="wateringStatus">Pompa Siaga (Auto)</span>
+              </div>
+            </div>
+
+            <!-- Card 2: INTENSITAS CAHAYA -->
+            <div class="summary-card">
+              <div class="summary-icon-circle amber-circle">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="none">
+                  <circle cx="12" cy="12" r="5" fill="#d97706" fill-opacity="0.22"/>
+                  <circle cx="12" cy="12" r="5" stroke="#d97706" stroke-width="2"/>
+                  <path d="M12 1v3m0 16v3M1 12h3m16 0h3M4.22 4.22l2.12 2.12m11.32 11.32l2.12 2.12M4.22 19.78l2.12-2.12m11.32-11.32l2.12-2.12" stroke="#d97706" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="summary-text-box">
+                <span class="summary-label">INTENSITAS CAHAYA</span>
+                <strong class="summary-value" id="summaryLightText"><span id="lightValue">--%</span> (<span id="lightChartStatus">Terang</span>)</strong>
+                <span class="summary-sub">Status: <b id="sheetOnlineTag" class="text-green">HEALTHY</b></span>
+              </div>
+            </div>
+
+            <!-- Card 3: STATUS POMPA AIR (AKTIF / MATI) -->
+            <div class="summary-card pump-summary-card" id="dashPumpCard">
+              <div class="summary-icon-circle blue-circle" id="dashPumpIcon">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="none">
+                  <circle cx="12" cy="14" r="6" fill="#0284c7" fill-opacity="0.2"/>
+                  <circle cx="12" cy="14" r="6" stroke="#0284c7" stroke-width="2"/>
+                  <path d="M12 2v6m-4-6h8" stroke="#0284c7" stroke-width="2.2" stroke-linecap="round"/>
+                  <path d="M12 11v6m-3-3h6" stroke="#0284c7" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="summary-text-box">
+                <span class="summary-label">STATUS POMPA AIR</span>
+                <strong class="summary-value" id="dashPumpTitle" style="display: flex; align-items: center; gap: 8px;">
+                  <span class="pump-state-dot offline" id="dashPumpDot"></span>
+                  <span id="dashPumpStatusText">MATI</span>
+                </strong>
+                <span class="summary-sub" id="dashPumpSub">Mode: <b>AUTO (Siaga)</b></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pot Aktif Quick Banner (Card Utama: Gradasi Hijau Gelap ke Emerald + Hiasan Lingkaran & Garis Abstrak) -->
+          <div class="active-pot-banner">
+            <svg class="banner-abstract-lines" viewBox="0 0 450 140" fill="none" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M-20 70 C 80 15, 170 120, 280 45 C 360 -15, 410 85, 470 55" stroke="rgba(255, 255, 255, 0.16)" stroke-width="2"/>
+              <path d="M0 100 C 100 45, 200 130, 310 75 C 380 35, 430 110, 480 90" stroke="rgba(167, 243, 208, 0.18)" stroke-width="1.8" stroke-dasharray="5 5"/>
+            </svg>
+            <div class="banner-plant-info">
+              <span class="banner-badge">POT AKTIF</span>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <h3 class="banner-title" id="activePlantTitle">Monstera Deliciosa</h3>
+                <svg class="sway-leaf" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#34d399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22v-9"/>
+                  <path d="M12 13a5 5 0 0 0 5-5c0-4-5-6-5-6s-5 2-5 6a5 5 0 0 0 5 5z"/>
+                </svg>
+              </div>
+              <span class="banner-code" id="activePlantSubtitle">smartplant_azarya_01</span>
+            </div>
+            <div class="banner-actions">
+              <button type="button" class="banner-btn" onclick="switchTab('control')">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                  <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                </svg>
+                Kontrol Pompa
+              </button>
+              <button type="button" class="banner-btn secondary" onclick="switchTab('settings')">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="3"/>
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                </svg>
+                Atur Ambang
+              </button>
+            </div>
+          </div>
+
+          <!-- DUA KARTU MONITORING DI DASHBOARD: -->
+          <!-- 1. KARTU KONDISI TANAH & ANALISIS KESEHATAN (Card Monitoring: Putih dengan Aksen Mint) -->
+          <div class="content-white-card" style="margin-top: 24px;">
+            <div class="card-section-header">
+              <div class="card-icon-badge duotone-mint-badge">
+                <svg class="sway-leaf" viewBox="0 0 24 24" width="24" height="24" fill="none">
+                  <path d="M12 13a6 6 0 0 0 6-6c0-4-6-5-6-5s-6 1-6 5a6 6 0 0 0 6 6z" fill="#059669" fill-opacity="0.22"/>
+                  <path d="M12 13a6 6 0 0 0 6-6c0-4-6-5-6-5s-6 1-6 5a6 6 0 0 0 6 6z" stroke="#064e3b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M12 8v14M12 15a4 4 0 0 1 4-4" stroke="#064e3b" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="card-title">Kondisi Tanah &amp; Analisis Kesehatan</h3>
+                <p class="card-subtitle">Data telemetri langsung dari sensor tanah dan sensor cahaya.</p>
+              </div>
+            </div>
+
+            <div class="control-telemetry-row">
+              <div class="telemetry-compact-box">
+                <span class="telemetry-label">Kelembapan Tanah</span>
+                <div class="telemetry-val-row">
+                  <strong class="telemetry-val text-green" id="ctrlHumidity">--%</strong>
+                  <span class="telemetry-chip" id="ctrlSoilStatus">Optimal</span>
+                </div>
+                <div class="mini-bar-track">
+                  <div class="mini-bar-fill" id="humidityBar" style="width: 0%;"></div>
+                </div>
+              </div>
+
+              <div class="telemetry-compact-box">
+                <span class="telemetry-label">Intensitas Cahaya</span>
+                <div class="telemetry-val-row">
+                  <strong class="telemetry-val text-orange" id="ctrlLight">--%</strong>
+                  <span class="telemetry-chip" id="ctrlLightStatus">Terang</span>
+                </div>
+                <div class="mini-bar-track">
+                  <div class="mini-bar-fill light-fill" id="lightBar" style="width: 0%;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Hasil Analisis -->
+            <div class="plant-analysis-card" id="plantAnalysisCard">
+              <div class="sheet-desc-text">
+                <strong id="analysisResultText">Menunggu data telemetri dari perangkat...</strong>
+              </div>
+              <div class="analysis-pill-group">
+                <span class="sensor-pill-badge state-basah" id="analysisSoilBadge">Tanah: --</span>
+                <span class="sensor-pill-badge state-tinggi" id="analysisLightBadge">Cahaya: --</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. KARTU GRAFIK TELEMETRI: TREN SENSOR REAL-TIME & HISTORIS (Card Monitoring) -->
+          <div class="content-white-card" style="margin-top: 24px;">
+            <div class="chart-card-header">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <div class="card-icon-badge duotone-mint-badge" style="width: 38px; height: 38px;">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
+                    <path d="M3 18l6-6 4 4 8-9v11H3z" fill="#059669" fill-opacity="0.18"/>
+                    <path d="M3 18l6-6 4 4 8-9" stroke="#064e3b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M3 3v18h18" stroke="#064e3b" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div>
+                  <span class="chart-eyebrow">GRAFIK TELEMETRI</span>
+                  <h4 class="chart-title">Tren Sensor Real-Time &amp; Historis</h4>
+                </div>
+              </div>
+              <div class="range-tabs-mini" id="rangeTabs" role="group" aria-label="Rentang waktu">
+                <button type="button" data-range="today" class="selected">Hari ini</button>
+                <button type="button" data-range="7d">7 hari</button>
+                <button type="button" data-range="30d">30 hari</button>
+              </div>
+            </div>
+            <div class="chart-canvas-box" style="height: 180px;">
+              <canvas id="humidityChart" aria-label="Grafik kelembapan tanah"></canvas>
+            </div>
+            <div class="chart-canvas-box" style="height: 180px; margin-top: 20px;">
+              <canvas id="lightChart" aria-label="Grafik intensitas cahaya"></canvas>
+            </div>
+            <div class="chart-card-footer" style="margin-top: 14px;">
+              <small id="chartNote">Rata-rata per 5 menit</small>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ================= VIEW 2: KONTROL POMPA (FOKUS PADA SAKELAR & MODE POMPA) ================= -->
+        <section class="tab-pane" id="view-control">
+          <div class="view-header-row">
+            <div>
+              <h2 class="view-screen-title">Kontrol Pompa Air</h2>
+              <p class="view-screen-subtitle">Atur mode penyiraman otomatis atau kendalikan sakelar pompa langsung dari website.</p>
+            </div>
+            <button class="pill-back-btn" type="button" onclick="switchTab('dashboard')">
+              ← Kembali ke Dashboard
+            </button>
+          </div>
+
+          <div class="clean-single-col">
+            <!-- Mode Operasi & Sakelar Pompa -->
+            <div class="content-white-card">
+              <div class="card-section-header">
+                <div class="card-icon-badge duotone-mint-badge">
+                  <svg viewBox="0 0 24 24" width="24" height="24" fill="none">
+                    <circle cx="12" cy="14" r="6" fill="#059669" fill-opacity="0.2"/>
+                    <circle cx="12" cy="14" r="6" stroke="#064e3b" stroke-width="2"/>
+                    <path d="M12 2v6m-4-6h8" stroke="#064e3b" stroke-width="2.2" stroke-linecap="round"/>
+                    <path d="M12 12v4m-2-2h4" stroke="#064e3b" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="card-title">Sakelar &amp; Mode Operasi Pompa</h3>
+                  <p class="card-subtitle">Pilih mode operasi untuk mengendalikan pompa air.</p>
+                </div>
+              </div>
+
+              <!-- Pilihan Mode AUTO vs MANUAL -->
+              <div class="mode-selection-box">
+                <span class="mode-box-label">PILIH MODE OPERASI</span>
+                <div class="mode-switch-large" role="group" aria-label="Mode Operasi">
+                  <button type="button" class="mode-large-btn selected" id="autoModeBtn">
+                    <span class="mode-btn-title">AUTO (Keputusan Cloud)</span>
+                    <span class="mode-btn-desc">Pompa menyiram otomatis saat tanah kering &lt; ambang batas dan hari terang (tidak menyiram di malam hari)</span>
+                  </button>
+                  <button type="button" class="mode-large-btn" id="manualModeBtn">
+                    <span class="mode-btn-title">MANUAL (Bebas)</span>
+                    <span class="mode-btn-desc">Kendali bebas: tekan tombol untuk menyalakan/mematikan pompa</span>
+                  </button>
+                </div>
+                <p class="mode-status-note" id="modeDescription" style="margin-top:12px; font-size:12px; color:var(--text-muted);">
+                  AUTO - Keputusan Cloud: Menyiram otomatis di siang hari saat tanah kering (penyiraman ditahan jika malam hari).
+                </p>
+              </div>
+
+              <!-- Status Pompa & Tombol Aksi Utama -->
+              <div class="pump-actuator-panel" style="margin-top: 20px;">
+                <div class="pump-state-indicator">
+                  <span class="pump-state-dot" id="ctrlPumpDot"></span>
+                  <span>Status Pompa Saat Ini: <strong id="ctrlPumpStatus">SIAGA / MATI</strong></span>
+                </div>
+
+                <button type="button" class="pump-action-large-btn" id="pumpButton" disabled>
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                  </svg>
+                  <span>Nyalakan Pompa Air</span>
+                </button>
+                <p class="pump-help-text" id="pumpHelp">Aktifkan mode MANUAL terlebih dahulu untuk menyiram secara manual.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ================= VIEW 3: PENGATURAN AMBANG ================= -->
+        <section class="tab-pane" id="view-settings">
+          <div class="view-header-row">
+            <div>
+              <h2 class="view-screen-title">Pengaturan Ambang Sensor</h2>
+              <p class="view-screen-subtitle">Kalibrasi batas kelembapan tanah kering, tanah lembab, dan ambang intensitas cahaya.</p>
+            </div>
+            <button class="pill-back-btn" type="button" onclick="switchTab('dashboard')">
+              ← Kembali ke Dashboard
+            </button>
+          </div>
+
+          <div class="clean-single-col">
+            <div class="content-white-card">
+              <div class="card-section-header">
+                <div class="card-icon-badge duotone-amber-badge">
+                  <svg viewBox="0 0 24 24" width="24" height="24" fill="none">
+                    <circle cx="9" cy="8" r="3.5" fill="#d97706" fill-opacity="0.25"/>
+                    <circle cx="15" cy="16" r="3.5" fill="#d97706" fill-opacity="0.25"/>
+                    <path d="M4 8h1.5m7 0H20M4 16h7.5m7 0H20" stroke="#064e3b" stroke-width="2.2" stroke-linecap="round"/>
+                    <circle cx="9" cy="8" r="3.5" stroke="#064e3b" stroke-width="2"/>
+                    <circle cx="15" cy="16" r="3.5" stroke="#064e3b" stroke-width="2"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="card-title">Ambang Batas Kelembapan &amp; Cahaya</h3>
+                  <p class="card-subtitle">Nilai ini menentukan kapan pompa mulai menyiram dan kapan berhenti menyiram.</p>
+                </div>
+              </div>
+
+              <div class="settings-sliders-grid" style="margin-top: 20px;">
+                <!-- Slider 1: Batas Kering -->
+                <div class="setting-slider-block">
+                  <div class="slider-header-row">
+                    <label for="dryRange"><strong>Batas Kering (Mulai Menyiram)</strong></label>
+                    <span class="threshold-tag tag-dry">&lt; Nilai ini</span>
+                  </div>
+                  <div class="slider-control-row">
+                    <input type="range" id="dryRange" min="0" max="100" step="1" value="40">
+                    <div class="input-number-pill">
+                      <input type="number" id="dryInput" class="compact-input" min="0" max="100" value="40">
+                      <span>%</span>
+                    </div>
+                  </div>
+                  <small class="slider-hint">Pompa otomatis menyala saat kelembapan tanah &lt; batas kering.</small>
+                </div>
+
+                <!-- Slider 2: Batas Lembab -->
+                <div class="setting-slider-block">
+                  <div class="slider-header-row">
+                    <label for="wetRange"><strong>Batas Lembab (Berhenti Menyiram)</strong></label>
+                    <span class="threshold-tag tag-wet">≥ Nilai ini</span>
+                  </div>
+                  <div class="slider-control-row">
+                    <input type="range" id="wetRange" min="0" max="100" step="1" value="70">
+                    <div class="input-number-pill">
+                      <input type="number" id="wetInput" class="compact-input" min="0" max="100" value="70">
+                      <span>%</span>
+                    </div>
+                  </div>
+                  <small class="slider-hint">Pompa otomatis berhenti saat kelembapan tanah mencapai batas lembab.</small>
+                </div>
+
+                <!-- Slider 3: Batas Cahaya -->
+                <div class="setting-slider-block">
+                  <div class="slider-header-row">
+                    <label for="lightRange"><strong>Batas Cahaya (Kategori Terang)</strong></label>
+                    <span class="threshold-tag tag-light">≥ Nilai ini</span>
+                  </div>
+                  <div class="slider-control-row">
+                    <input type="range" id="lightRange" min="0" max="100" step="1" value="50">
+                    <div class="input-number-pill">
+                      <input type="number" id="lightInput" class="compact-input" min="0" max="100" value="50">
+                      <span>%</span>
+                    </div>
+                  </div>
+                  <small class="slider-hint">Di bawah ambang ini dikategorikan malam hari (pompa tidak akan menyiram walau tanah kering).</small>
+                </div>
+              </div>
+
+              <!-- 3-Zone Bar -->
+              <div class="zone-bar-wrap" style="margin-top: 24px;">
+                <span class="zone-label-title">Visualisasi Zona Kelembapan:</span>
+                <div class="threshold-zone-bar" aria-hidden="true">
+                  <div class="zone-segment zone-dry" id="zoneDry">Kering</div>
+                  <div class="zone-segment zone-ideal" id="zoneIdeal">Optimal</div>
+                  <div class="zone-segment zone-wet" id="zoneWet">Basah</div>
+                </div>
+              </div>
+
+              <!-- Tombol Simpan -->
+              <button type="button" id="saveThresholdBtn" class="log-activity-btn full-btn" style="margin-top: 24px;">
+                Simpan Pengaturan Ambang Batas
+              </button>
+              <p id="thresholdMsg" class="form-ok" hidden></p>
+
+              <!-- Perbandingan Database vs ESP32 -->
+              <div class="facts-card" style="margin-top: 20px;">
+                <div class="fact-row">
+                  <span>Tersimpan di Database</span>
+                  <span>Kering: <b id="savedDry">40%</b> · Lembab: <b id="savedWet">70%</b> · Cahaya: <b id="savedLight">50%</b></span>
+                </div>
+                <div class="fact-row">
+                  <span>Aktif Terbaca di ESP32</span>
+                  <span>Kering: <b id="reportedDry">--</b> · Lembab: <b id="reportedWet">--</b> · Cahaya: <b id="reportedLight">--</b></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ================= VIEW 4: RIWAYAT LOG (TABEL PENGUKURAN) ================= -->
+        <section class="tab-pane" id="view-history">
+          <div class="view-header-row">
+            <div>
+              <h2 class="view-screen-title">Riwayat Log Telemetri</h2>
+              <p class="view-screen-subtitle">Catatan historis data kelembapan tanah, intensitas cahaya, dan operasi pompa air.</p>
+            </div>
+            <button class="pill-back-btn" type="button" onclick="switchTab('dashboard')">
+              ← Kembali ke Dashboard
+            </button>
+          </div>
+
+          <!-- Tabel Data Log -->
+          <div class="content-white-card">
+            <h4 class="card-title" style="margin-bottom: 14px;">Tabel Data Log Pengukuran</h4>
+            <div class="history-table-container">
+              <table class="history-table">
+                <thead>
+                  <tr><th>Waktu</th><th>Kelembapan</th><th>Cahaya</th><th>Pompa</th><th>Mode</th><th>Analisis</th></tr>
+                </thead>
+                <tbody id="historyBody"></tbody>
+              </table>
+              <p class="empty-note" id="historyEmpty" hidden>Belum ada data pada rentang waktu ini.</p>
+            </div>
+          </div>
+        </section>
+
+      </main> <!-- /app-main-views -->
+
+
+      <!-- ================= FLOATING DOCK MOBILE (4 MENU TERPISAH) ================= -->
+      <nav class="floating-frosted-dock" aria-label="Navigasi Mobile">
+        <button type="button" class="dock-nav-item active" data-tab="dashboard" aria-label="Dashboard" title="Dashboard">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+            <rect x="3" y="3" width="7.5" height="7.5" rx="2.5"/>
+            <rect x="13.5" y="3" width="7.5" height="7.5" rx="2.5"/>
+            <rect x="3" y="13.5" width="7.5" height="7.5" rx="2.5"/>
+            <rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2.5"/>
+          </svg>
+        </button>
+        <button type="button" class="dock-nav-item" data-tab="control" aria-label="Kontrol Pompa" title="Kontrol Pompa">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2v6m0 0a4 4 0 1 1-4 0V2"/>
+            <circle cx="12" cy="14" r="2.5"/>
+          </svg>
+        </button>
+        <button type="button" class="dock-nav-item" data-tab="settings" aria-label="Pengaturan Ambang" title="Ambang Batas">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="4" y1="21" x2="4" y2="14"/>
+            <line x1="12" y1="21" x2="12" y2="12"/>
+            <line x1="20" y1="21" x2="20" y2="16"/>
+            <circle cx="4" cy="12" r="2.5" fill="currentColor"/>
+            <circle cx="12" cy="10" r="2.5" fill="currentColor"/>
+            <circle cx="20" cy="14" r="2.5" fill="currentColor"/>
+          </svg>
+        </button>
+        <button type="button" class="dock-nav-item" data-tab="history" aria-label="Riwayat Log" title="Riwayat">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="4"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+        </button>
+      </nav>
+
+    </div> <!-- /main-wrapper -->
+
+  </div> <!-- /app-layout -->
+
+
+  <!-- ================= ADD NEW PLANT MODAL ================= -->
+  <div class="modal-overlay" id="claimModal" hidden>
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Tambah Pot Baru</h3>
+        <button type="button" class="close-modal-btn" id="closeClaimBtn">✕</button>
+      </div>
+      <p class="subtitle">Masukkan kode perangkat ESP32 Anda untuk menghubungkannya ke akun ini.</p>
+      <form id="claimForm">
+        <label class="field-label">Kode Perangkat ESP32
+          <input class="field-input" name="device_code" value="smartplant_azarya_01" maxlength="64" required placeholder="smartplant_azarya_01">
+        </label>
+        <label class="field-label">Nama Tanaman / Pot
+          <input class="field-input" name="device_name" value="Monstera Plant" maxlength="100" placeholder="Monstera Plant">
+        </label>
+        <p id="claimError" class="form-error" hidden></p>
+        <button type="submit" class="log-activity-btn full-btn" style="margin-top:16px;">+ Tambahkan Pot</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast" role="status"></div>
+
+  <!-- Hidden Compatibility Elements (so legacy JS code never encounters undefined DOM nodes) -->
+  <div style="display:none;" aria-hidden="true">
+    <select id="deviceSelect"></select>
+    <span id="deviceCodeLabel">-</span>
+    <span id="sideDot"></span>
+    <span id="topbarUserName">User</span>
+    <span id="welcomeUserName">User</span>
+    <span id="userInitial">U</span>
+    <div id="heroPlantCard"></div>
+    <div id="heroPlantName">Plant</div>
+    <div id="sheetPlantTitle">Plant</div>
+    <span id="heroPlantSubtitle">ESP32 Online</span>
+    <span id="soilStatus">Optimal</span>
+    <span id="lightStatus">Terang</span>
+    <span id="wateringStatusNote"></span>
+    <span id="gaugeHumidity">--%</span>
+    <span id="gaugeStatus">Optimal</span>
+    <span id="gaugeSunlight">--%</span>
+    <span id="gaugeThumb"></span>
+    <span id="modeDescriptionTag">AUTO</span>
+    <span id="pumpValue">MATI</span>
+    <span id="pumpDot"></span>
+    <span id="pumpBadge">AUTO - SIAGA</span>
+    <span id="ruleText">ON &lt; 40% · OFF ≥ 70%</span>
+    <span id="currentDateDisplay"></span>
+    <input type="text" id="potSearchInput">
+    <div id="plantListItems"></div>
+    <span id="deviceCountPill"></span>
+    <button id="sidebarAddBtn"></button>
+    <button id="quickModeBtn"></button>
+    <div id="roomFilterRow"></div>
+    <div id="mobileNav"></div>
+    <table id="matrixTable">
+      <tr id="matrixRow_dry_high"></tr>
+      <tr id="matrixRow_dry_low"></tr>
+      <tr id="matrixRow_wet_high"></tr>
+      <tr id="matrixRow_wet_low"></tr>
+    </table>
+    <span id="matrixCurrentStatus"></span>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>

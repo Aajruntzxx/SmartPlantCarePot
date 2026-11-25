@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+backend/node_modules/
+
+# Environment variables (Berisi kredensial rahasia)
+.env
+backend/.env
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS Files
+Thumbs.db
+.DS_Store
+
+# IDEs
+.vscode/
+.idea/

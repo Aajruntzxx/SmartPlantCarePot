@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Smart Plant Care Pot | Daftar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-body">
+  <div class="ambient-canvas-bg">
+    <svg class="ambient-wave-svg" viewBox="0 0 1440 900" fill="none" preserveAspectRatio="none">
+      <path d="M-100 200 C 300 120, 600 480, 1100 220 C 1300 120, 1500 280, 1600 250" stroke="#cfe3d5" stroke-width="2" opacity="0.65"/>
+      <path d="M-50 450 C 400 350, 700 700, 1200 400 C 1400 280, 1550 450, 1650 420" stroke="#cfe3d5" stroke-width="2" opacity="0.55"/>
+    </svg>
+  </div>
+  <main class="auth-card" style="position: relative; z-index: 10;">
+    <div class="brand">
+      <div class="brand-logo">
+        <svg viewBox="0 0 32 32" width="28" height="28" fill="none">
+          <path d="M16 3C11 3 7 7 7 12c0 3.2 1.6 6 4 7.6L9 24h6l-1-4.2c4-.7 7-4.1 7-8.8 0-4.4-3.6-8-8-8z" fill="#32976a" opacity="0.85"/>
+          <circle cx="16" cy="12" r="3.5" fill="#1e6044"/>
+          <path d="M22 17c2.5 1.5 4 4.1 4 7 0 4.4-3.6 8-8 8-3.2 0-6-1.6-7.6-4L15 26v-6l4.2 1c.7-4 4.1-7 8.8-7z" fill="#48b580" opacity="0.9"/>
+          <circle cx="18" cy="22" r="2.5" fill="#174a36"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <strong>Smart Plant</strong>
+        <span>CARE POT</span>
+      </div>
+    </div>
+    <h1>Daftar</h1>
+    <p class="subtitle">Buat akun untuk mengelola perangkat Smart Plant Care Pot Anda.</p>
+    <form id="authForm" data-mode="register" novalidate>
+      <label>Nama Lengkap<input type="text" name="name" class="field-input" autocomplete="name" maxlength="100" required placeholder="Nama Anda"></label>
+      <label>Email<input type="email" name="email" class="field-input" autocomplete="email" maxlength="190" required placeholder="nama@gmail.com"></label>
+      <label>Password<input type="password" name="password" class="field-input" autocomplete="new-password" minlength="8" maxlength="72" required placeholder="Minimal 8 karakter"></label>
+      <p id="authError" class="form-error" role="alert" hidden></p>
+      <button type="submit" class="get-started-green-btn full-btn" style="margin-top: 14px; padding: 13px;">Buat Akun</button>
+    </form>
+    <p class="auth-alt">Sudah punya akun? <a href="login.html">Masuk di sini</a></p>
+  </main>
+  <script src="auth.js"></script>
+</body>
+</html>
