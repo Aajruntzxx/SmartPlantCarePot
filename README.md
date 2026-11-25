@@ -1,10 +1,10 @@
-# 🌿 PotPintar — Smart Plant Care Pot
+# PotPintar — Smart Plant Care Pot
 
 Sistem pot pintar berbasis Internet of Things (IoT) untuk pemantauan kondisi lingkungan tanaman secara *real-time* dan otomatisasi penyiraman berbasis *cloud decision*.
 
 ---
 
-## 👥 Identitas Kelompok
+## Identitas Kelompok
 
 **Praktikum Internet of Things (IoT) — Kelas IF-F**  
 **Program Studi Informatika, UPN "Veteran" Yogyakarta**  
@@ -19,13 +19,13 @@ Tahun Ajaran 2026/2027
 
 ---
 
-## 📖 Deskripsi Singkat Proyek
+## Deskripsi Singkat Proyek
 
 **PotPintar** adalah solusi perawatan tanaman otomatis berbasis IoT yang mengintegrasikan mikrokontroler **ESP32**, protokol komunikasi **MQTT**, backend **Node.js (Express)**, basis data **MySQL**, dan antarmuka web interaktif.
 
 Sistem ini dirancang untuk menjaga kelembapan tanah optimal secara mandiri sekaligus memberikan kemudahan pemantauan dan kontrol bagi pemilik tanaman dari mana saja melalui web dashboard.
 
-### ✨ Fitur Utama:
+### Fitur Utama:
 1. **Monitoring Real-Time:** Memantau kelembapan tanah (*soil moisture*) dan intensitas cahaya (*LDR*) secara langsung melalui web dan layar LCD 16x2 fisik.
 2. **Otomatisasi 3 Kriteria (Cloud & Local):**
    - **Batas Kering (*Dry Threshold*):** Pompa otomatis aktif jika kelembapan tanah turun di bawah batas yang ditentukan pengguna.
@@ -37,7 +37,7 @@ Sistem ini dirancang untuk menjaga kelembapan tanah optimal secara mandiri sekal
 
 ---
 
-## 🛠️ Teknologi yang Digunakan
+## Teknologi yang Digunakan
 
 - **Hardware:** ESP32 Dev Module, Capacitive/Analog Soil Moisture Sensor, LDR Light Sensor, 5V Relay Module, Water Pump, LCD 16x2 I2C.
 - **Komunikasi:** MQTT (HiveMQ Broker), HTTP/REST API, SSE (Server-Sent Events) untuk pembaruan *real-time*.
