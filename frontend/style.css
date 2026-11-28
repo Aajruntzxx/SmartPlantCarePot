@@ -1499,19 +1499,7 @@ button {
 }
 
 .pill-back-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
-  background: var(--bg-card);
-  border: 1px solid var(--border-light);
-  border-radius: 20px;
-  font-size: 12.5px;
-  font-weight: 700;
-  color: var(--text-main);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
-  transition: all 0.15s ease;
-  white-space: nowrap;
+  display: none !important;
 }
 
 .pill-back-btn:hover {
@@ -2990,21 +2978,35 @@ button {
   }
   .view-header-row {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 4px;
     margin-bottom: 16px;
   }
+  .view-header-row > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
   .view-screen-title {
-    font-size: 19px;
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 4px;
+    text-align: center;
   }
   .view-screen-subtitle {
-    font-size: 12px;
-    line-height: 1.4;
+    font-size: 12.5px;
+    line-height: 1.45;
+    text-align: center;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
   }
   .pill-back-btn {
-    align-self: flex-start;
-    font-size: 11.5px;
-    padding: 5px 12px;
+    display: none !important;
   }
 
   /* Monitoring Sensor & Analisis */
