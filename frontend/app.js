@@ -474,6 +474,9 @@ function renderPump(on) {
   if ($("dashPumpCard")) {
     $("dashPumpCard").classList.toggle("active-pump", state.pump);
   }
+  if ($("dashPumpBar")) {
+    $("dashPumpBar").style.width = state.pump ? "100%" : "0%";
+  }
   const pumpPanel = document.querySelector(".pump-actuator-panel");
   if (pumpPanel) {
     pumpPanel.classList.toggle("pump-running", state.pump);

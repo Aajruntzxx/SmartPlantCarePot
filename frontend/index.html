@@ -182,63 +182,8 @@
             <p class="greeting-subtitle">Berikut adalah ringkasan status pot pintar dan sensor tanaman Anda.</p>
           </div>
 
-          <!-- 3 Large Summary Metric Cards (Kelembapan, Cahaya, dan Status Pompa Air) -->
-          <div class="summary-cards-row" style="margin-top: 20px;">
-            <!-- Card 1: KELEMBAPAN TANAH -->
-            <div class="summary-card">
-              <div class="summary-icon-circle mint-circle">
-                <svg viewBox="0 0 24 24" width="28" height="28" fill="none">
-                  <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="#059669" fill-opacity="0.2"/>
-                  <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M9.5 12a3.5 3.5 0 0 0 3.5 3.5" stroke="#059669" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-              </div>
-              <div class="summary-text-box">
-                <span class="summary-label">KELEMBAPAN TANAH</span>
-                <strong class="summary-value" id="summaryWaterText"><span id="humidityValue">--%</span> (<span id="activeWaterStatus">Optimal</span>)</strong>
-                <span class="summary-sub" id="wateringStatus">Pompa Siaga (Auto)</span>
-              </div>
-            </div>
-
-            <!-- Card 2: INTENSITAS CAHAYA -->
-            <div class="summary-card">
-              <div class="summary-icon-circle amber-circle">
-                <svg viewBox="0 0 24 24" width="28" height="28" fill="none">
-                  <circle cx="12" cy="12" r="5" fill="#d97706" fill-opacity="0.22"/>
-                  <circle cx="12" cy="12" r="5" stroke="#d97706" stroke-width="2"/>
-                  <path d="M12 1v3m0 16v3M1 12h3m16 0h3M4.22 4.22l2.12 2.12m11.32 11.32l2.12 2.12M4.22 19.78l2.12-2.12m11.32-11.32l2.12-2.12" stroke="#d97706" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-              </div>
-              <div class="summary-text-box">
-                <span class="summary-label">INTENSITAS CAHAYA</span>
-                <strong class="summary-value" id="summaryLightText"><span id="lightValue">--%</span> (<span id="lightChartStatus">Terang</span>)</strong>
-                <span class="summary-sub">Status: <b id="sheetOnlineTag" class="text-green">HEALTHY</b></span>
-              </div>
-            </div>
-
-            <!-- Card 3: STATUS POMPA AIR (AKTIF / MATI) -->
-            <div class="summary-card pump-summary-card" id="dashPumpCard">
-              <div class="summary-icon-circle blue-circle" id="dashPumpIcon">
-                <svg viewBox="0 0 24 24" width="28" height="28" fill="none">
-                  <circle cx="12" cy="14" r="6" fill="#0284c7" fill-opacity="0.2"/>
-                  <circle cx="12" cy="14" r="6" stroke="#0284c7" stroke-width="2"/>
-                  <path d="M12 2v6m-4-6h8" stroke="#0284c7" stroke-width="2.2" stroke-linecap="round"/>
-                  <path d="M12 11v6m-3-3h6" stroke="#0284c7" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-              </div>
-              <div class="summary-text-box">
-                <span class="summary-label">STATUS POMPA AIR</span>
-                <strong class="summary-value" id="dashPumpTitle" style="display: flex; align-items: center; gap: 8px;">
-                  <span class="pump-state-dot offline" id="dashPumpDot"></span>
-                  <span id="dashPumpStatusText">MATI</span>
-                </strong>
-                <span class="summary-sub" id="dashPumpSub">Mode: <b>AUTO (Siaga)</b></span>
-              </div>
-            </div>
-          </div>
-
           <!-- Pot Aktif Quick Banner (Card Utama: Gradasi Hijau Gelap ke Emerald + Hiasan Lingkaran & Garis Abstrak) -->
-          <div class="active-pot-banner">
+          <div class="active-pot-banner" style="margin-top: 18px;">
             <svg class="banner-abstract-lines" viewBox="0 0 450 140" fill="none" preserveAspectRatio="none" aria-hidden="true">
               <path d="M-20 70 C 80 15, 170 120, 280 45 C 360 -15, 410 85, 470 55" stroke="rgba(255, 255, 255, 0.16)" stroke-width="2"/>
               <path d="M0 100 C 100 45, 200 130, 310 75 C 380 35, 430 110, 480 90" stroke="rgba(167, 243, 208, 0.18)" stroke-width="1.8" stroke-dasharray="5 5"/>
@@ -284,7 +229,7 @@
               </div>
               <div>
                 <h3 class="card-title">Kondisi Tanah &amp; Analisis Kesehatan</h3>
-                <p class="card-subtitle">Data telemetri langsung dari sensor tanah dan sensor cahaya.</p>
+                <p class="card-subtitle">Data telemetri langsung dari sensor tanah, cahaya, dan pompa air.</p>
               </div>
             </div>
 
@@ -308,6 +253,20 @@
                 </div>
                 <div class="mini-bar-track">
                   <div class="mini-bar-fill light-fill" id="lightBar" style="width: 0%;"></div>
+                </div>
+              </div>
+
+              <div class="telemetry-compact-box pump-telemetry-box" id="dashPumpCard">
+                <span class="telemetry-label">Status Pompa Air</span>
+                <div class="telemetry-val-row">
+                  <strong class="telemetry-val text-blue" id="dashPumpTitle" style="display: flex; align-items: center; gap: 6px;">
+                    <span class="pump-state-dot offline" id="dashPumpDot"></span>
+                    <span id="dashPumpStatusText">MATI</span>
+                  </strong>
+                  <span class="telemetry-chip" id="dashPumpSub">Mode: AUTO</span>
+                </div>
+                <div class="mini-bar-track">
+                  <div class="mini-bar-fill pump-fill" id="dashPumpBar" style="width: 0%;"></div>
                 </div>
               </div>
             </div>
@@ -742,6 +701,15 @@
 
   <!-- Hidden Compatibility Elements (so legacy JS code never encounters undefined DOM nodes) -->
   <div style="display:none;" aria-hidden="true">
+    <span id="summaryWaterText"></span>
+    <span id="humidityValue"></span>
+    <span id="activeWaterStatus"></span>
+    <span id="wateringStatus"></span>
+    <span id="summaryLightText"></span>
+    <span id="lightValue"></span>
+    <span id="lightChartStatus"></span>
+    <span id="sheetOnlineTag"></span>
+    <div id="dashPumpIcon"></div>
     <select id="deviceSelect"></select>
     <span id="deviceCodeLabel">-</span>
     <span id="sideDot"></span>

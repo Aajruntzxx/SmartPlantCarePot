@@ -1823,7 +1823,7 @@ button {
 /* Live Telemetry compact boxes in control (Card Monitoring: Putih dengan Aksen Mint) */
 .control-telemetry-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 14px;
   margin-bottom: 18px;
 }
@@ -1897,6 +1897,19 @@ button {
 
 .mini-bar-fill.light-fill {
   background: linear-gradient(90deg, #f59e0b 0%, #d97706 100%);
+}
+
+.mini-bar-fill.pump-fill {
+  background: linear-gradient(90deg, #0284c7 0%, #0ea5e9 100%);
+}
+
+.text-blue {
+  color: #0284c7;
+}
+
+.telemetry-compact-box.active-pump {
+  border-color: #38bdf8;
+  background: #f0f9ff;
 }
 
 /* Big Pump Actuator Panel */
@@ -3000,6 +3013,9 @@ button {
     gap: 10px;
     margin-bottom: 14px;
   }
+  .telemetry-compact-box.pump-telemetry-box {
+    grid-column: 1 / -1;
+  }
   .telemetry-compact-box {
     padding: 12px;
     border-radius: 14px;
@@ -3129,7 +3145,11 @@ button {
     border-radius: 16px;
   }
   .control-telemetry-row {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .telemetry-compact-box.pump-telemetry-box {
+    grid-column: 1 / -1;
   }
   .history-table th {
     padding: 9px 8px;
