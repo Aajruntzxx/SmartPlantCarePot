@@ -298,7 +298,7 @@ function renderHistoryLogs() {
     return true;
   });
 
-  // Update Summary Stats Bar
+  // Update Summary Stats Bar (Angka Bersih)
   if ($("histStatCount")) $("histStatCount").textContent = allLogs.length;
   if ($("histStatPump")) $("histStatPump").textContent = allLogs.filter((x) => x.pump_status === "ON").length;
   if ($("histStatSoil")) {
@@ -309,64 +309,9 @@ function renderHistoryLogs() {
     const avgLight = allLogs.length ? (allLogs.reduce((acc, c) => acc + Number(c.light_intensity), 0) / allLogs.length).toFixed(1) : "0";
     $("histStatLight").textContent = `${avgLight}%`;
   }
+  if ($("historyCountPill")) $("historyCountPill").textContent = `${filtered.length} data`;
 
-  // 1. Render Card View (Mobile & Responsive Grid)
-  const cardsGrid = $("historyCardsGrid");
-  if (cardsGrid) {
-    cardsGrid.replaceChildren();
-    filtered.forEach((r) => {
-      const analysis = getPlantAnalysis(r.soil_moisture, r.light_intensity, state.dryThreshold, state.lightThreshold);
-      const isPumpOn = r.pump_status === "ON";
-      const isAuto = r.mode === "AUTO";
-      const isDry = Number(r.soil_moisture) < Number(state.dryThreshold || 40);
-      const isBright = Number(r.light_intensity) >= Number(state.lightThreshold || 50);
-
-      const card = document.createElement("div");
-      card.className = `history-card ${isPumpOn ? "card-pump-on" : ""}`;
-      card.innerHTML = `
-        <div class="history-card-header">
-          <div class="history-card-time">
-            <svg viewBox="0 0 20 20" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="10" cy="10" r="7"/>
-              <polyline points="10 6 10 10 13 12"/>
-            </svg>
-            <span>${new Date(r.recorded_at).toLocaleString("id-ID")}</span>
-          </div>
-          <div class="history-card-badges">
-            <span class="hist-badge ${isAuto ? "mode-auto" : "mode-manual"}">${r.mode}</span>
-            <span class="hist-badge ${isPumpOn ? "pump-on" : "pump-off"}">
-              ${isPumpOn ? '<span class="pulse-dot"></span> MENYIRAM' : 'STANDBY'}
-            </span>
-          </div>
-        </div>
-        <div class="history-card-body">
-          <div class="history-metric-box metric-soil">
-            <div class="metric-icon-wrap">💧</div>
-            <div class="metric-info">
-              <span class="metric-label">Kelembapan</span>
-              <strong class="metric-val">${r.soil_moisture}%</strong>
-              <span class="metric-pill ${isDry ? 'pill-kering' : 'pill-lembab'}">${isDry ? 'Tanah Kering' : 'Tanah Lembab'}</span>
-            </div>
-          </div>
-          <div class="history-metric-box metric-light">
-            <div class="metric-icon-wrap">☀️</div>
-            <div class="metric-info">
-              <span class="metric-label">Cahaya</span>
-              <strong class="metric-val">${r.light_intensity}%</strong>
-              <span class="metric-pill ${isBright ? 'pill-terang' : 'pill-redup'}">${isBright ? 'Terang (Siang)' : 'Redup (Malam)'}</span>
-            </div>
-          </div>
-        </div>
-        <div class="history-card-footer">
-          <span style="font-size: 13px;">🌱</span>
-          <span>${analysis.text}</span>
-        </div>
-      `;
-      cardsGrid.appendChild(card);
-    });
-  }
-
-  // 2. Render Table View (Responsive Table)
+  // Render Table View (Tabel Responsif Bersih & Rapi)
   const body = $("historyBody");
   if (body) {
     body.replaceChildren();
@@ -374,13 +319,30 @@ function renderHistoryLogs() {
       const analysis = getPlantAnalysis(r.soil_moisture, r.light_intensity, state.dryThreshold, state.lightThreshold);
       const isPumpOn = r.pump_status === "ON";
       const isAuto = r.mode === "AUTO";
+      const isDry = Number(r.soil_moisture) < Number(state.dryThreshold || 40);
+      const isBright = Number(r.light_intensity) >= Number(state.lightThreshold || 50);
+
       const tr = document.createElement("tr");
       tr.innerHTML = `
-        <td style="font-weight: 600; color: #475569;">${new Date(r.recorded_at).toLocaleString("id-ID")}</td>
-        <td><strong style="color: #0f172a;">${r.soil_moisture}%</strong></td>
-        <td><strong style="color: #0f172a;">${r.light_intensity}%</strong></td>
-        <td><span class="hist-badge ${isPumpOn ? "pump-on" : "pump-off"}">${isPumpOn ? "MENYIRAM (ON)" : "STANDBY (OFF)"}</span></td>
-        <td><span class="hist-badge ${isAuto ? "mode-auto" : "mode-manual"}">${r.mode}</span></td>
+        <td class="history-cell-time">${new Date(r.recorded_at).toLocaleString("id-ID")}</td>
+        <td>
+          <span class="history-metric-val">${r.soil_moisture}%</span>
+          <span class="history-sub-badge ${isDry ? "badge-warn" : "badge-ok"}">${isDry ? "Kering" : "Lembab"}</span>
+        </td>
+        <td>
+          <span class="history-metric-val">${r.light_intensity}%</span>
+          <span class="history-sub-badge ${isBright ? "badge-ok" : "badge-subtle"}">${isBright ? "Terang" : "Redup"}</span>
+        </td>
+        <td>
+          <span class="hist-badge ${isPumpOn ? "pump-on" : "pump-off"}">
+            ${isPumpOn ? '<span class="pulse-dot"></span> Menyiram' : "Standby"}
+          </span>
+        </td>
+        <td>
+          <span class="hist-badge ${isAuto ? "mode-auto" : "mode-manual"}">
+            ${isAuto ? "Otomatis" : "Manual"}
+          </span>
+        </td>
         <td class="history-analysis-text">${analysis.text}</td>
       `;
       body.appendChild(tr);
@@ -1045,26 +1007,6 @@ document.querySelectorAll(".history-filter-chips .filter-chip").forEach((chip) =
     renderHistoryLogs();
   });
 });
-
-if ($("viewToggleCard")) {
-  $("viewToggleCard").addEventListener("click", () => {
-    $("viewToggleCard").classList.add("active");
-    if ($("viewToggleTable")) $("viewToggleTable").classList.remove("active");
-    if ($("historyCardsWrap")) $("historyCardsWrap").classList.remove("is-hidden");
-    if ($("historyTableWrap")) $("historyTableWrap").classList.add("is-hidden");
-    state.historyViewMode = "card";
-  });
-}
-
-if ($("viewToggleTable")) {
-  $("viewToggleTable").addEventListener("click", () => {
-    $("viewToggleTable").classList.add("active");
-    if ($("viewToggleCard")) $("viewToggleCard").classList.remove("active");
-    if ($("historyCardsWrap")) $("historyCardsWrap").classList.add("is-hidden");
-    if ($("historyTableWrap")) $("historyTableWrap").classList.remove("is-hidden");
-    state.historyViewMode = "table";
-  });
-}
 
 if ($("historyRefreshBtn")) {
   $("historyRefreshBtn").addEventListener("click", () => {

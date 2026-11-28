@@ -551,31 +551,59 @@
             </button>
           </div>
 
-          <!-- Ringkasan Statistik Log Interaktif -->
+          <!-- Ringkasan Statistik Log Interaktif (Clean Vector Icons) -->
           <div class="history-stats-bar">
             <div class="hist-stat-card">
-              <div class="hist-stat-icon icon-count">📋</div>
+              <div class="hist-stat-icon icon-count">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                  <line x1="16" y1="13" x2="8" y2="13"/>
+                  <line x1="16" y1="17" x2="8" y2="17"/>
+                  <polyline points="10 9 9 9 8 9"/>
+                </svg>
+              </div>
               <div class="hist-stat-meta">
                 <span class="hist-stat-label">Total Log</span>
                 <strong class="hist-stat-val" id="histStatCount">0</strong>
               </div>
             </div>
             <div class="hist-stat-card">
-              <div class="hist-stat-icon icon-pump">⚡</div>
+              <div class="hist-stat-icon icon-pump">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                </svg>
+              </div>
               <div class="hist-stat-meta">
                 <span class="hist-stat-label">Penyiraman (ON)</span>
                 <strong class="hist-stat-val" id="histStatPump">0</strong>
               </div>
             </div>
             <div class="hist-stat-card">
-              <div class="hist-stat-icon icon-soil">💧</div>
+              <div class="hist-stat-icon icon-soil">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                </svg>
+              </div>
               <div class="hist-stat-meta">
                 <span class="hist-stat-label">Rata-rata Tanah</span>
                 <strong class="hist-stat-val" id="histStatSoil">0%</strong>
               </div>
             </div>
             <div class="hist-stat-card">
-              <div class="hist-stat-icon icon-light">☀️</div>
+              <div class="hist-stat-icon icon-light">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="5"/>
+                  <line x1="12" y1="1" x2="12" y2="3"/>
+                  <line x1="12" y1="21" x2="12" y2="23"/>
+                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                  <line x1="1" y1="12" x2="3" y2="12"/>
+                  <line x1="21" y1="12" x2="23" y2="12"/>
+                  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+              </div>
               <div class="hist-stat-meta">
                 <span class="hist-stat-label">Rata-rata Cahaya</span>
                 <strong class="hist-stat-val" id="histStatLight">0%</strong>
@@ -583,7 +611,7 @@
             </div>
           </div>
 
-          <!-- Toolbar Interaktif (Filter, Search, Refresh, View Mode) -->
+          <!-- Toolbar Interaktif (Pencarian, Filter, Tombol Segarkan) -->
           <div class="content-white-card history-toolbar-card">
             <div class="history-controls-row">
               <div class="history-search-box">
@@ -591,33 +619,11 @@
                   <circle cx="9" cy="9" r="6"/>
                   <line x1="13.5" y1="13.5" x2="18" y2="18"/>
                 </svg>
-                <input type="text" id="historySearchInput" placeholder="Cari tanggal, waktu, mode..." aria-label="Cari riwayat log" />
+                <input type="text" id="historySearchInput" placeholder="Cari tanggal, waktu, status, mode..." aria-label="Cari riwayat log" />
                 <button type="button" id="historySearchClear" class="search-clear-btn" hidden title="Hapus pencarian">✕</button>
               </div>
 
               <div class="history-action-group">
-                <!-- Mode Tampilan: Kartu vs Tabel -->
-                <div class="view-toggle-pills" role="group" aria-label="Pilihan Tampilan">
-                  <button type="button" class="view-toggle-btn active" id="viewToggleCard" data-mode="card" title="Tampilan Kartu (Nyaman di HP)">
-                    <svg viewBox="0 0 20 20" width="14" height="14" fill="currentColor">
-                      <rect x="2" y="3" width="7" height="6" rx="1.5"/>
-                      <rect x="11" y="3" width="7" height="6" rx="1.5"/>
-                      <rect x="2" y="11" width="7" height="6" rx="1.5"/>
-                      <rect x="11" y="11" width="7" height="6" rx="1.5"/>
-                    </svg>
-                    <span>Kartu</span>
-                  </button>
-                  <button type="button" class="view-toggle-btn" id="viewToggleTable" data-mode="table" title="Tampilan Tabel Lengkap">
-                    <svg viewBox="0 0 20 20" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
-                      <rect x="2" y="3" width="16" height="14" rx="2"/>
-                      <line x1="2" y1="8" x2="18" y2="8"/>
-                      <line x1="2" y1="13" x2="18" y2="13"/>
-                      <line x1="8" y1="8" x2="8" y2="17"/>
-                    </svg>
-                    <span>Tabel</span>
-                  </button>
-                </div>
-
                 <!-- Tombol Segarkan Data Real-Time -->
                 <button type="button" class="history-refresh-btn" id="historyRefreshBtn" title="Segarkan Data Log">
                   <svg id="refreshBtnIcon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
@@ -628,34 +634,25 @@
               </div>
             </div>
 
-            <!-- Filter Kategori Chips -->
+            <!-- Filter Kategori Clean Pills (Tanpa Simbol Emoji) -->
             <div class="history-filter-chips" role="tablist">
-              <button type="button" class="filter-chip active" data-filter="all">Semua Log</button>
-              <button type="button" class="filter-chip" data-filter="pump-on">💦 Pompa Menyiram</button>
-              <button type="button" class="filter-chip" data-filter="pump-off">⏸️ Pompa Standby</button>
-              <button type="button" class="filter-chip" data-filter="soil-dry">🏜️ Tanah Kering</button>
-              <button type="button" class="filter-chip" data-filter="mode-auto">🤖 Mode Otomatis</button>
-              <button type="button" class="filter-chip" data-filter="mode-manual">🖐️ Mode Manual</button>
+              <button type="button" class="filter-chip active" data-filter="all">Semua</button>
+              <button type="button" class="filter-chip" data-filter="pump-on">Pompa Menyiram</button>
+              <button type="button" class="filter-chip" data-filter="pump-off">Pompa Standby</button>
+              <button type="button" class="filter-chip" data-filter="soil-dry">Tanah Kering</button>
+              <button type="button" class="filter-chip" data-filter="mode-auto">Mode Otomatis</button>
+              <button type="button" class="filter-chip" data-filter="mode-manual">Mode Manual</button>
             </div>
           </div>
 
-          <!-- Container Data Log: Kartu & Tabel -->
+          <!-- Container Tabel Responsif & Interaktif -->
           <div class="content-white-card" style="margin-top: 16px;">
-            <!-- 1. Tampilan Kartu Interaktif (Default & Optimal untuk Mobile) -->
-            <div class="history-cards-wrap" id="historyCardsWrap">
-              <div class="history-cards-grid" id="historyCardsGrid">
-                <!-- Diisi secara dinamis oleh JavaScript -->
-              </div>
+            <div class="history-table-header">
+              <h4 class="card-title" style="margin: 0;">Tabel Data Log Pengukuran</h4>
+              <span class="table-count-pill" id="historyCountPill">0 data</span>
             </div>
 
-            <!-- 2. Tampilan Tabel Responsif (Scroll Horizontal di Mobile) -->
-            <div class="history-table-container is-hidden" id="historyTableWrap">
-              <div class="table-scroll-hint mobile-only">
-                <svg viewBox="0 0 20 20" width="14" height="14" fill="currentColor">
-                  <path d="M10 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm1 11H9v-2h2v2zm0-4H9V5h2v4z"/>
-                </svg>
-                <span>Geser ke kanan untuk melihat rincian kolom lainnya</span>
-              </div>
+            <div class="history-table-container" id="historyTableWrap">
               <table class="history-table">
                 <thead>
                   <tr>

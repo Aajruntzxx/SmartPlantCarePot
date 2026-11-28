@@ -2239,7 +2239,7 @@ button {
   border-radius: 10px;
 }
 
-/* ================= RIWAYAT LOG INTERAKTIF & MOBILE ================= */
+/* ================= RIWAYAT LOG INTERAKTIF & RESPONSIF ================= */
 .history-stats-bar {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -2270,9 +2270,24 @@ button {
   border-radius: 10px;
   display: grid;
   place-items: center;
-  font-size: 18px;
   background: var(--mint-light);
+  color: var(--dark-forest-green);
   flex-shrink: 0;
+}
+
+.hist-stat-icon.icon-pump {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.hist-stat-icon.icon-soil {
+  background: #f0fdf4;
+  color: #16a34a;
+}
+
+.hist-stat-icon.icon-light {
+  background: #fffbeb;
+  color: #d97706;
 }
 
 .hist-stat-meta {
@@ -2356,35 +2371,6 @@ button {
   gap: 10px;
 }
 
-.view-toggle-pills {
-  display: flex;
-  background: #f1f5f9;
-  border-radius: 10px;
-  padding: 3px;
-  gap: 2px;
-}
-
-.view-toggle-btn {
-  border: none;
-  background: transparent;
-  padding: 6px 12px;
-  border-radius: 8px;
-  font-size: 12px;
-  font-weight: 700;
-  color: #64748b;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: all 0.2s ease;
-}
-
-.view-toggle-btn.active {
-  background: #ffffff;
-  color: #0f172a;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-}
-
 .history-refresh-btn {
   display: flex;
   align-items: center;
@@ -2392,7 +2378,7 @@ button {
   background: var(--mint-light);
   border: 1px solid var(--mint-border);
   color: var(--dark-forest-green);
-  padding: 8px 14px;
+  padding: 8px 16px;
   border-radius: 10px;
   font-size: 12.5px;
   font-weight: 700;
@@ -2433,7 +2419,7 @@ button {
 .filter-chip {
   border: 1px solid #e2e8f0;
   background: #ffffff;
-  padding: 6px 14px;
+  padding: 7px 16px;
   border-radius: 20px;
   font-size: 12px;
   font-weight: 600;
@@ -2456,83 +2442,112 @@ button {
   box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25);
 }
 
-/* ================= GRID KARTU LOG MOBILE ================= */
-.history-cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 14px;
-}
-
-.history-card {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 14px;
-  padding: 16px;
+/* Header Tabel & Counter Pill */
+.history-table-header {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.history-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
-  border-color: #cbd5e1;
-}
-
-.history-card.card-pump-on {
-  border-left: 4px solid #10b981;
-  background: linear-gradient(180deg, #f0fdf4 0%, #ffffff 40%);
-}
-
-.history-card-header {
-  display: flex;
-  align-items: center;
   justify-content: space-between;
-  gap: 8px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #f1f5f9;
+  align-items: center;
+  margin-bottom: 14px;
 }
 
-.history-card-time {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
+.table-count-pill {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #047857;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  padding: 3px 10px;
+  border-radius: 12px;
+}
+
+/* Tabel Styling */
+.history-table-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--mint-border-subtle);
+  border-radius: 12px;
+}
+
+.history-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 13px;
+}
+
+.history-table th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  text-align: left;
+  padding: 12px 14px;
+  background: var(--mint-light);
+  color: var(--dark-forest-green);
+  font-weight: 800;
+  font-size: 11.5px;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid var(--mint-border);
+  white-space: nowrap;
+}
+
+.history-table td {
+  padding: 13px 14px;
+  border-bottom: 1px solid var(--mint-border-subtle);
+  color: var(--text-main);
+  transition: background 0.15s ease;
+  white-space: nowrap;
+}
+
+.history-table tr:last-child td {
+  border-bottom: none;
+}
+
+.history-table tr:hover td {
+  background: #f0fdf4;
+}
+
+.history-cell-time {
   font-weight: 600;
-  color: #64748b;
+  color: #475569;
 }
 
-.history-card-badges {
-  display: flex;
-  align-items: center;
-  gap: 6px;
+.history-metric-val {
+  font-weight: 800;
+  color: #0f172a;
+  margin-right: 6px;
+}
+
+.history-sub-badge {
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.history-sub-badge.badge-ok {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.history-sub-badge.badge-warn {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.history-sub-badge.badge-subtle {
+  background: #f1f5f9;
+  color: #475569;
 }
 
 .hist-badge {
-  padding: 3px 8px;
+  padding: 4px 10px;
   border-radius: 6px;
-  font-size: 10.5px;
-  font-weight: 800;
-  letter-spacing: 0.4px;
+  font-size: 11px;
+  font-weight: 700;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-}
-
-.hist-badge.mode-auto {
-  background: #eff6ff;
-  color: #2563eb;
-  border: 1px solid #bfdbfe;
-}
-
-.hist-badge.mode-manual {
-  background: #fff7ed;
-  color: #ea580c;
-  border: 1px solid #fed7aa;
+  gap: 5px;
 }
 
 .hist-badge.pump-on {
@@ -2545,6 +2560,18 @@ button {
   background: #f1f5f9;
   color: #64748b;
   border: 1px solid #e2e8f0;
+}
+
+.hist-badge.mode-auto {
+  background: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #bfdbfe;
+}
+
+.hist-badge.mode-manual {
+  background: #fff7ed;
+  color: #ea580c;
+  border: 1px solid #fed7aa;
 }
 
 .pulse-dot {
@@ -2562,109 +2589,30 @@ button {
   100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(22, 163, 74, 0); }
 }
 
-.history-card-body {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-
-.history-metric-box {
-  background: #f8fafc;
-  border: 1px solid #f1f5f9;
-  border-radius: 10px;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.history-metric-box.metric-soil {
-  background: #f0fdf4;
-  border-color: #dcfce7;
-}
-
-.history-metric-box.metric-light {
-  background: #fffbeb;
-  border-color: #fef3c7;
-}
-
-.metric-icon-wrap {
-  font-size: 20px;
-  line-height: 1;
-}
-
-.metric-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.metric-label {
-  font-size: 11px;
-  font-weight: 600;
-  color: #64748b;
-}
-
-.metric-val {
-  font-size: 15px;
-  font-weight: 800;
-  color: #0f172a;
-}
-
-.metric-pill {
-  font-size: 10px;
-  font-weight: 700;
-  margin-top: 2px;
-}
-
-.metric-pill.pill-kering { color: #dc2626; }
-.metric-pill.pill-lembab { color: #16a34a; }
-.metric-pill.pill-terang { color: #d97706; }
-.metric-pill.pill-redup { color: #64748b; }
-
-.history-card-footer {
-  background: #fafafa;
-  border-radius: 8px;
-  padding: 8px 10px;
-  display: flex;
-  align-items: flex-start;
-  gap: 6px;
-  font-size: 11.5px;
-  color: #475569;
+.history-table td.history-analysis-text {
+  white-space: normal;
+  min-width: 240px;
+  font-size: 12.5px;
+  color: #334155;
   line-height: 1.4;
-  border: 1px solid #f1f5f9;
-}
-
-.table-scroll-hint {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: #f8fafc;
-  border: 1px dashed #cbd5e1;
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-size: 11.5px;
-  color: #64748b;
-  margin-bottom: 10px;
-}
-
-.is-hidden {
-  display: none !important;
 }
 
 /* Penyesuaian Responsif HP / Mobile */
 @media (max-width: 768px) {
   .history-stats-bar {
     grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
   }
   .history-controls-row {
     flex-direction: column;
     align-items: stretch;
   }
   .history-action-group {
-    justify-content: space-between;
+    justify-content: flex-end;
   }
-  .history-cards-grid {
-    grid-template-columns: 1fr;
+  .history-refresh-btn {
+    width: 100%;
+    justify-content: center;
   }
 }
 
@@ -2676,6 +2624,7 @@ button {
     padding: 10px 12px;
   }
 }
+
 
 
 .analysis-matrix-table tr.row-active {
@@ -2877,18 +2826,106 @@ button {
   }
   .top-header {
     padding: 0 16px;
+    height: 64px;
   }
   .app-main-views {
-    padding: 0 16px 90px 16px;
+    padding: 0 14px 96px 14px;
   }
   .header-search-wrap {
     display: none;
   }
   .summary-cards-row {
     grid-template-columns: 1fr;
+    gap: 12px;
   }
   .plants-card-grid {
     grid-template-columns: 1fr;
+  }
+  .view-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .pill-back-btn {
+    align-self: flex-start;
+  }
+  .active-pot-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px 18px;
+    gap: 16px;
+    border-radius: 20px;
+  }
+  .banner-actions {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .banner-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 12px;
+  }
+  .control-telemetry-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .chart-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .range-tabs-mini {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .range-tabs-mini button {
+    flex: 1;
+    text-align: center;
+  }
+  /* Optimalisasi Slider Touch Layar HP */
+  input[type="range"] {
+    height: 10px;
+    margin: 10px 0;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+  /* Sentuhan Feedback Interaktif Cepat di HP */
+  button:active, .nav-item:active, .filter-chip:active, .dock-nav-item:active {
+    transform: scale(0.96) !important;
+  }
+  /* Floating Dock Mobile Safe Area */
+  .floating-frosted-dock {
+    bottom: 12px;
+    padding: 6px 14px;
+    gap: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-main-views {
+    padding: 0 10px 96px 10px;
+  }
+  .top-header {
+    padding: 0 12px;
+  }
+  .content-white-card {
+    padding: 16px 14px;
+    border-radius: 16px;
+  }
+  .status-pill {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+  .btn-add-pot {
+    padding: 6px 10px;
+    font-size: 12px;
   }
 }
 
