@@ -16,6 +16,10 @@ const state = {
   range: "today",
   stream: null,
   lastLogsFetch: 0,
+  historyLogs: [],
+  historyFilter: "all",
+  historySearch: "",
+  historyViewMode: "card",
   notifications: [],   // {id, type, msg, time, read}
   unreadCount: 0,
   _lastDryNotif: 0,
@@ -266,9 +270,132 @@ function renderThresholdLine() {
   }
 }
 
+function renderHistoryLogs() {
+  const allLogs = state.historyLogs || [];
+  const q = (state.historySearch || "").toLowerCase().trim();
+  const filter = state.historyFilter || "all";
+
+  // Filter logs sesuai chip dan pencarian
+  const filtered = allLogs.filter((r) => {
+    // 1. Filter Kategori
+    if (filter === "pump-on" && r.pump_status !== "ON") return false;
+    if (filter === "pump-off" && r.pump_status !== "OFF") return false;
+    if (filter === "soil-dry" && Number(r.soil_moisture) >= Number(state.dryThreshold || 40)) return false;
+    if (filter === "mode-auto" && r.mode !== "AUTO") return false;
+    if (filter === "mode-manual" && r.mode !== "MANUAL") return false;
+
+    // 2. Search Text
+    if (q) {
+      const dateStr = new Date(r.recorded_at).toLocaleString("id-ID").toLowerCase();
+      const analysis = getPlantAnalysis(r.soil_moisture, r.light_intensity, state.dryThreshold, state.lightThreshold);
+      const textMatch =
+        dateStr.includes(q) ||
+        String(r.mode || "").toLowerCase().includes(q) ||
+        String(r.pump_status || "").toLowerCase().includes(q) ||
+        analysis.text.toLowerCase().includes(q);
+      if (!textMatch) return false;
+    }
+    return true;
+  });
+
+  // Update Summary Stats Bar
+  if ($("histStatCount")) $("histStatCount").textContent = allLogs.length;
+  if ($("histStatPump")) $("histStatPump").textContent = allLogs.filter((x) => x.pump_status === "ON").length;
+  if ($("histStatSoil")) {
+    const avgSoil = allLogs.length ? (allLogs.reduce((acc, c) => acc + Number(c.soil_moisture), 0) / allLogs.length).toFixed(1) : "0";
+    $("histStatSoil").textContent = `${avgSoil}%`;
+  }
+  if ($("histStatLight")) {
+    const avgLight = allLogs.length ? (allLogs.reduce((acc, c) => acc + Number(c.light_intensity), 0) / allLogs.length).toFixed(1) : "0";
+    $("histStatLight").textContent = `${avgLight}%`;
+  }
+
+  // 1. Render Card View (Mobile & Responsive Grid)
+  const cardsGrid = $("historyCardsGrid");
+  if (cardsGrid) {
+    cardsGrid.replaceChildren();
+    filtered.forEach((r) => {
+      const analysis = getPlantAnalysis(r.soil_moisture, r.light_intensity, state.dryThreshold, state.lightThreshold);
+      const isPumpOn = r.pump_status === "ON";
+      const isAuto = r.mode === "AUTO";
+      const isDry = Number(r.soil_moisture) < Number(state.dryThreshold || 40);
+      const isBright = Number(r.light_intensity) >= Number(state.lightThreshold || 50);
+
+      const card = document.createElement("div");
+      card.className = `history-card ${isPumpOn ? "card-pump-on" : ""}`;
+      card.innerHTML = `
+        <div class="history-card-header">
+          <div class="history-card-time">
+            <svg viewBox="0 0 20 20" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="10" cy="10" r="7"/>
+              <polyline points="10 6 10 10 13 12"/>
+            </svg>
+            <span>${new Date(r.recorded_at).toLocaleString("id-ID")}</span>
+          </div>
+          <div class="history-card-badges">
+            <span class="hist-badge ${isAuto ? "mode-auto" : "mode-manual"}">${r.mode}</span>
+            <span class="hist-badge ${isPumpOn ? "pump-on" : "pump-off"}">
+              ${isPumpOn ? '<span class="pulse-dot"></span> MENYIRAM' : 'STANDBY'}
+            </span>
+          </div>
+        </div>
+        <div class="history-card-body">
+          <div class="history-metric-box metric-soil">
+            <div class="metric-icon-wrap">💧</div>
+            <div class="metric-info">
+              <span class="metric-label">Kelembapan</span>
+              <strong class="metric-val">${r.soil_moisture}%</strong>
+              <span class="metric-pill ${isDry ? 'pill-kering' : 'pill-lembab'}">${isDry ? 'Tanah Kering' : 'Tanah Lembab'}</span>
+            </div>
+          </div>
+          <div class="history-metric-box metric-light">
+            <div class="metric-icon-wrap">☀️</div>
+            <div class="metric-info">
+              <span class="metric-label">Cahaya</span>
+              <strong class="metric-val">${r.light_intensity}%</strong>
+              <span class="metric-pill ${isBright ? 'pill-terang' : 'pill-redup'}">${isBright ? 'Terang (Siang)' : 'Redup (Malam)'}</span>
+            </div>
+          </div>
+        </div>
+        <div class="history-card-footer">
+          <span style="font-size: 13px;">🌱</span>
+          <span>${analysis.text}</span>
+        </div>
+      `;
+      cardsGrid.appendChild(card);
+    });
+  }
+
+  // 2. Render Table View (Responsive Table)
+  const body = $("historyBody");
+  if (body) {
+    body.replaceChildren();
+    filtered.forEach((r) => {
+      const analysis = getPlantAnalysis(r.soil_moisture, r.light_intensity, state.dryThreshold, state.lightThreshold);
+      const isPumpOn = r.pump_status === "ON";
+      const isAuto = r.mode === "AUTO";
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td style="font-weight: 600; color: #475569;">${new Date(r.recorded_at).toLocaleString("id-ID")}</td>
+        <td><strong style="color: #0f172a;">${r.soil_moisture}%</strong></td>
+        <td><strong style="color: #0f172a;">${r.light_intensity}%</strong></td>
+        <td><span class="hist-badge ${isPumpOn ? "pump-on" : "pump-off"}">${isPumpOn ? "MENYIRAM (ON)" : "STANDBY (OFF)"}</span></td>
+        <td><span class="hist-badge ${isAuto ? "mode-auto" : "mode-manual"}">${r.mode}</span></td>
+        <td class="history-analysis-text">${analysis.text}</td>
+      `;
+      body.appendChild(tr);
+    });
+  }
+
+  if ($("historyEmpty")) $("historyEmpty").hidden = filtered.length > 0;
+}
+
 async function loadLogs() {
   if (!state.device) return;
   state.lastLogsFetch = Date.now();
+  const refreshBtn = $("historyRefreshBtn");
+  if (refreshBtn) refreshBtn.classList.add("spinning");
+
   try {
     const data = await api(`/api/devices/${state.device.id}/logs?range=${state.range}`);
 
@@ -289,31 +416,14 @@ async function loadLogs() {
     const note = { today: "Rata-rata per 5 menit", "7d": "Rata-rata per 1 jam", "30d": "Rata-rata per 6 jam" }[data.range];
     if ($("chartNote")) $("chartNote").textContent = note;
 
-    const body = $("historyBody");
-    if (body) {
-      body.replaceChildren();
-      data.recent.forEach((r) => {
-        const analysis = getPlantAnalysis(r.soil_moisture, r.light_intensity, state.dryThreshold, state.lightThreshold);
-        const tr = document.createElement("tr");
-        [
-          new Date(r.recorded_at).toLocaleString("id-ID"),
-          `${r.soil_moisture}%`,
-          `${r.light_intensity}%`,
-          r.pump_status,
-          r.mode,
-          analysis.text
-        ].forEach((text, idx) => {
-          const td = document.createElement("td");
-          td.textContent = text;
-          if (idx === 5) td.className = "history-analysis-text";
-          tr.appendChild(td);
-        });
-        body.appendChild(tr);
-      });
-    }
-    if ($("historyEmpty")) $("historyEmpty").hidden = data.recent.length > 0;
+    state.historyLogs = data.recent || [];
+    renderHistoryLogs();
   } catch (e) {
     showToast(e.message);
+  } finally {
+    if (refreshBtn) {
+      setTimeout(() => refreshBtn.classList.remove("spinning"), 500);
+    }
   }
 }
 
@@ -906,6 +1016,59 @@ if ($("roomFilterRow")) {
         card.style.display = room.includes(filter) ? "" : "none";
       }
     });
+  });
+}
+
+// ================= INTERAKTIVITAS RIWAYAT LOG TELEMETRI =================
+if ($("historySearchInput")) {
+  $("historySearchInput").addEventListener("input", (e) => {
+    state.historySearch = e.target.value;
+    if ($("historySearchClear")) $("historySearchClear").hidden = !e.target.value;
+    renderHistoryLogs();
+  });
+}
+
+if ($("historySearchClear")) {
+  $("historySearchClear").addEventListener("click", () => {
+    if ($("historySearchInput")) $("historySearchInput").value = "";
+    state.historySearch = "";
+    $("historySearchClear").hidden = true;
+    renderHistoryLogs();
+  });
+}
+
+document.querySelectorAll(".history-filter-chips .filter-chip").forEach((chip) => {
+  chip.addEventListener("click", () => {
+    document.querySelectorAll(".history-filter-chips .filter-chip").forEach((c) => c.classList.remove("active"));
+    chip.classList.add("active");
+    state.historyFilter = chip.dataset.filter || "all";
+    renderHistoryLogs();
+  });
+});
+
+if ($("viewToggleCard")) {
+  $("viewToggleCard").addEventListener("click", () => {
+    $("viewToggleCard").classList.add("active");
+    if ($("viewToggleTable")) $("viewToggleTable").classList.remove("active");
+    if ($("historyCardsWrap")) $("historyCardsWrap").classList.remove("is-hidden");
+    if ($("historyTableWrap")) $("historyTableWrap").classList.add("is-hidden");
+    state.historyViewMode = "card";
+  });
+}
+
+if ($("viewToggleTable")) {
+  $("viewToggleTable").addEventListener("click", () => {
+    $("viewToggleTable").classList.add("active");
+    if ($("viewToggleCard")) $("viewToggleCard").classList.remove("active");
+    if ($("historyCardsWrap")) $("historyCardsWrap").classList.add("is-hidden");
+    if ($("historyTableWrap")) $("historyTableWrap").classList.remove("is-hidden");
+    state.historyViewMode = "table";
+  });
+}
+
+if ($("historyRefreshBtn")) {
+  $("historyRefreshBtn").addEventListener("click", () => {
+    loadLogs();
   });
 }
 
