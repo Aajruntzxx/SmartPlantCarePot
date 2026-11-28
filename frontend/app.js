@@ -932,9 +932,10 @@ function switchTab(tab) {
 window.switchTab = switchTab;
 
 document.querySelectorAll(".dock-nav-item, .nav-item, .mobile-nav-item").forEach((link) => {
+  if (link.id === "mobileLogoutBtn" || link.classList.contains("dock-logout-item")) return;
   link.addEventListener("click", (e) => {
     e.preventDefault();
-    switchTab(link.dataset.tab);
+    if (link.dataset.tab) switchTab(link.dataset.tab);
   });
 });
 
@@ -1288,11 +1289,18 @@ if ($("claimForm")) {
   });
 }
 
-if ($("logoutBtn")) {
-  $("logoutBtn").addEventListener("click", async () => {
+async function handleUserLogout() {
+  if (confirm("Apakah Anda yakin ingin keluar dari akun?")) {
     try { await api("/api/auth/logout", { method: "POST" }); } catch { /* ignore */ }
     location.replace("/login.html");
-  });
+  }
+}
+
+if ($("logoutBtn")) {
+  $("logoutBtn").addEventListener("click", handleUserLogout);
+}
+if ($("mobileLogoutBtn")) {
+  $("mobileLogoutBtn").addEventListener("click", handleUserLogout);
 }
 
 // Inisialisasi Tanggal & Salam

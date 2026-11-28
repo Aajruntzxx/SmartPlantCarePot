@@ -2788,6 +2788,12 @@ button {
   color: var(--primary-green-dark);
 }
 
+.dock-nav-item.dock-logout-item:hover,
+.dock-nav-item.dock-logout-item:active {
+  color: #ef4444 !important;
+  background: rgba(239, 68, 68, 0.12) !important;
+}
+
 /* ================= 13. RESPONSIVE BREAKPOINTS ================= */
 @media (max-width: 1200px) {
   .dashboard-layout-row {
@@ -2844,9 +2850,14 @@ button {
     border: 1px solid rgba(255, 255, 255, 0.85);
     box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.12), 0 4px 12px -2px rgba(0, 0, 0, 0.04);
     border-radius: 999px;
-    padding: 6px 14px;
-    gap: 12px;
+    padding: 6px 10px;
+    gap: 8px;
     z-index: 300;
+  }
+
+  .dock-nav-item {
+    width: 40px;
+    height: 40px;
   }
 
   .top-header {
@@ -3143,7 +3154,16 @@ button {
     padding: 12px 12px calc(105px + env(safe-area-inset-bottom, 0px)) 12px !important;
   }
   .top-header {
-    padding: 0 12px;
+    padding: 0 10px;
+    gap: 6px;
+  }
+  .top-header-right {
+    gap: 6px;
+  }
+  .status-pill {
+    max-width: 105px;
+    padding: 0 8px;
+    font-size: 10.5px;
   }
   .content-white-card {
     padding: 15px 12px;
