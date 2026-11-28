@@ -2823,55 +2823,165 @@ button {
   }
   .floating-frosted-dock {
     display: flex;
+    bottom: 12px;
+    padding: 6px 14px;
+    gap: 14px;
   }
   .top-header {
-    padding: 0 16px;
-    height: 64px;
+    padding: 0 14px;
+    height: 60px;
+    gap: 10px;
+  }
+  .top-header-right {
+    gap: 8px;
+  }
+  .status-pill {
+    padding: 5px 10px;
+    font-size: 11.5px;
+  }
+  .btn-add-pot .btn-add-text {
+    display: none;
+  }
+  .btn-add-pot {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 800;
+    min-width: 36px;
+    justify-content: center;
   }
   .app-main-views {
-    padding: 0 14px 96px 14px;
+    padding: 0 12px 100px 12px;
   }
   .header-search-wrap {
     display: none;
   }
+
+  /* Ringkasan Dashboard 2-Kolom Rapi di Mobile */
+  .greeting-header {
+    margin-bottom: 14px;
+  }
+  .greeting-title {
+    font-size: 21px;
+    font-weight: 800;
+    margin-bottom: 2px;
+  }
+  .greeting-subtitle {
+    font-size: 12px;
+    line-height: 1.4;
+  }
   .summary-cards-row {
-    grid-template-columns: 1fr;
-    gap: 12px;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 14px !important;
   }
-  .plants-card-grid {
-    grid-template-columns: 1fr;
+  .summary-cards-row > *:nth-child(3) {
+    grid-column: 1 / -1;
   }
-  .view-header-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-    margin-bottom: 18px;
+  .summary-card {
+    padding: 12px 14px;
+    border-radius: 16px;
+    gap: 10px;
   }
-  .pill-back-btn {
-    align-self: flex-start;
+  .summary-icon-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
   }
+  .summary-icon-circle svg {
+    width: 20px;
+    height: 20px;
+  }
+  .summary-label {
+    font-size: 9px;
+    letter-spacing: 0.4px;
+  }
+  .summary-value {
+    font-size: 14.5px;
+  }
+  .summary-sub {
+    font-size: 10px;
+  }
+
+  /* Banner Pot Aktif */
   .active-pot-banner {
     flex-direction: column;
     align-items: flex-start;
-    padding: 20px 18px;
-    gap: 16px;
-    border-radius: 20px;
+    padding: 18px 16px;
+    gap: 14px;
+    border-radius: 18px;
+    margin-top: 16px;
+  }
+  .banner-plant-info {
+    width: 100%;
+  }
+  .banner-title {
+    font-size: 17px;
   }
   .banner-actions {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
   }
   .banner-btn {
     width: 100%;
     justify-content: center;
-    padding: 12px;
+    padding: 10px 8px;
+    font-size: 12px;
+    border-radius: 10px;
+    white-space: nowrap;
   }
+
+  /* Card Konten Putih */
+  .content-white-card {
+    padding: 18px 16px;
+    border-radius: 18px;
+  }
+  .view-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .view-screen-title {
+    font-size: 19px;
+  }
+  .view-screen-subtitle {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+  .pill-back-btn {
+    align-self: flex-start;
+    font-size: 11.5px;
+    padding: 5px 12px;
+  }
+
+  /* Monitoring & Analisis */
   .control-telemetry-row {
-    grid-template-columns: 1fr;
-    gap: 12px;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
   }
+  .telemetry-compact-box {
+    padding: 12px;
+    border-radius: 14px;
+  }
+  .telemetry-label {
+    font-size: 10px;
+  }
+  .telemetry-val {
+    font-size: 16px;
+  }
+  .plant-analysis-card {
+    padding: 12px 14px;
+    border-radius: 12px;
+  }
+  .analysis-pill-group {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  /* Grafik */
   .chart-card-header {
     flex-direction: column;
     align-items: flex-start;
@@ -2879,16 +2989,65 @@ button {
   }
   .range-tabs-mini {
     width: 100%;
-    justify-content: space-between;
+    display: flex;
+    background: #f1f5f9;
+    padding: 3px;
+    border-radius: 10px;
   }
   .range-tabs-mini button {
     flex: 1;
     text-align: center;
+    padding: 6px 4px;
+    font-size: 11.5px;
   }
+  .chart-canvas-box {
+    height: 170px !important;
+  }
+
+  /* Mode Kontrol Pompa */
+  .mode-switch-large {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .mode-large-btn {
+    padding: 12px 14px;
+    border-radius: 12px;
+  }
+  .pump-action-large-btn {
+    padding: 13px;
+    font-size: 13.5px;
+    border-radius: 12px;
+  }
+
+  /* Pengaturan Ambang Batas */
+  .settings-sliders-grid {
+    gap: 14px;
+  }
+  .slider-header-row {
+    font-size: 12.5px;
+  }
+  .slider-control-row {
+    gap: 10px;
+  }
+  .input-number-pill {
+    padding: 4px 8px;
+  }
+  .compact-input {
+    width: 38px;
+    font-size: 13px;
+  }
+  .fact-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 10px 0;
+    font-size: 12px;
+  }
+
   /* Optimalisasi Slider Touch Layar HP */
   input[type="range"] {
     height: 10px;
-    margin: 10px 0;
+    margin: 8px 0;
   }
   input[type="range"]::-webkit-slider-thumb {
     width: 26px;
@@ -2896,36 +3055,38 @@ button {
     border-radius: 50%;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   }
-  /* Sentuhan Feedback Interaktif Cepat di HP */
-  button:active, .nav-item:active, .filter-chip:active, .dock-nav-item:active {
+
+  /* Feedback Sentuhan Cepat */
+  button:active, .nav-item:active, .filter-chip:active, .dock-nav-item:active, .summary-card:active {
     transform: scale(0.96) !important;
-  }
-  /* Floating Dock Mobile Safe Area */
-  .floating-frosted-dock {
-    bottom: 12px;
-    padding: 6px 14px;
-    gap: 14px;
   }
 }
 
 @media (max-width: 480px) {
   .app-main-views {
-    padding: 0 10px 96px 10px;
+    padding: 0 10px 100px 10px;
   }
   .top-header {
-    padding: 0 12px;
+    padding: 0 10px;
   }
   .content-white-card {
-    padding: 16px 14px;
+    padding: 15px 12px;
     border-radius: 16px;
   }
-  .status-pill {
-    padding: 4px 8px;
-    font-size: 11px;
+  .control-telemetry-row {
+    grid-template-columns: 1fr;
   }
-  .btn-add-pot {
-    padding: 6px 10px;
-    font-size: 12px;
+  .history-table th {
+    padding: 9px 8px;
+    font-size: 10.5px;
+  }
+  .history-table td {
+    padding: 9px 8px;
+    font-size: 11.5px;
+  }
+  .hist-badge {
+    padding: 2px 6px;
+    font-size: 9.5px;
   }
 }
 
