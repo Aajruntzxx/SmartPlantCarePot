@@ -681,7 +681,7 @@ button {
 /* ================= 5. TAB PANES SYSTEM ================= */
 .app-main-views {
   flex: 1;
-  padding: 0 32px 32px 32px;
+  padding: 28px 32px 36px 32px;
 }
 
 .tab-pane {
@@ -710,9 +710,7 @@ button {
 
 /* Greeting Header */
 .greeting-header {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  display: none !important;
 }
 
 .greeting-title {
@@ -724,10 +722,15 @@ button {
   margin-bottom: 4px;
 }
 
-.greeting-subtitle {
-  font-size: 13.5px;
-  color: var(--text-muted);
-  font-weight: 500;
+.greeting-subtitle,
+.view-screen-subtitle,
+.card-subtitle,
+.slider-hint,
+.mode-btn-desc,
+.mode-status-note,
+.pump-help-text,
+.modal-card .subtitle {
+  display: none !important;
 }
 
 /* 3 Summary Monitoring Cards (Card Monitoring: Putih Bersih dengan Aksen Mint) */
@@ -1515,7 +1518,7 @@ button {
 
 /* ================= 6. CARD UTAMA (Gradasi Hijau Identitas PlantCare - Bersih & Elegan) ================= */
 .active-pot-banner {
-  margin-top: 20px;
+  margin-top: 0;
   position: relative;
   overflow: hidden;
   background: linear-gradient(135deg, #064e3b 0%, #047857 50%, #059669 100%);
@@ -2947,7 +2950,7 @@ button {
     padding: 18px 16px;
     gap: 14px;
     border-radius: 18px;
-    margin-top: 14px;
+    margin-top: 0;
   }
   .banner-plant-info {
     width: 100%;

@@ -176,14 +176,8 @@
 
         <!-- ================= VIEW 1: DASHBOARD (LENGKAP DENGAN SENSOR & GRAFIK) ================= -->
         <section class="tab-pane active" id="view-dashboard">
-          <!-- Greeting Header -->
-          <div class="greeting-header">
-            <h2 class="greeting-title" id="greetingTitle">Good Morning</h2>
-            <p class="greeting-subtitle">Berikut adalah ringkasan status pot pintar dan sensor tanaman Anda.</p>
-          </div>
-
           <!-- Pot Aktif Quick Banner (Card Utama: Gradasi Hijau Gelap ke Emerald + Hiasan Lingkaran & Garis Abstrak) -->
-          <div class="active-pot-banner" style="margin-top: 18px;">
+          <div class="active-pot-banner">
             <svg class="banner-abstract-lines" viewBox="0 0 450 140" fill="none" preserveAspectRatio="none" aria-hidden="true">
               <path d="M-20 70 C 80 15, 170 120, 280 45 C 360 -15, 410 85, 470 55" stroke="rgba(255, 255, 255, 0.16)" stroke-width="2"/>
               <path d="M0 100 C 100 45, 200 130, 310 75 C 380 35, 430 110, 480 90" stroke="rgba(167, 243, 208, 0.18)" stroke-width="1.8" stroke-dasharray="5 5"/>
@@ -229,7 +223,6 @@
               </div>
               <div>
                 <h3 class="card-title">Kondisi Tanah &amp; Analisis Kesehatan</h3>
-                <p class="card-subtitle">Data telemetri langsung dari sensor tanah, cahaya, dan pompa air.</p>
               </div>
             </div>
 
@@ -323,7 +316,6 @@
           <div class="view-header-row">
             <div>
               <h2 class="view-screen-title">Kontrol Pompa Air</h2>
-              <p class="view-screen-subtitle">Atur mode penyiraman otomatis atau kendalikan sakelar pompa langsung dari website.</p>
             </div>
           </div>
 
@@ -341,7 +333,6 @@
                 </div>
                 <div>
                   <h3 class="card-title">Sakelar &amp; Mode Operasi Pompa</h3>
-                  <p class="card-subtitle">Pilih mode operasi untuk mengendalikan pompa air.</p>
                 </div>
               </div>
 
@@ -350,17 +341,12 @@
                 <span class="mode-box-label">PILIH MODE OPERASI</span>
                 <div class="mode-switch-large" role="group" aria-label="Mode Operasi">
                   <button type="button" class="mode-large-btn selected" id="autoModeBtn">
-                    <span class="mode-btn-title">AUTO (Keputusan Cloud)</span>
-                    <span class="mode-btn-desc">Pompa menyiram otomatis saat tanah kering &lt; ambang batas dan hari terang (tidak menyiram di malam hari)</span>
+                    <span class="mode-btn-title">AUTO (Otomatis)</span>
                   </button>
                   <button type="button" class="mode-large-btn" id="manualModeBtn">
                     <span class="mode-btn-title">MANUAL (Bebas)</span>
-                    <span class="mode-btn-desc">Kendali bebas: tekan tombol untuk menyalakan/mematikan pompa</span>
                   </button>
                 </div>
-                <p class="mode-status-note" id="modeDescription" style="margin-top:12px; font-size:12px; color:var(--text-muted);">
-                  AUTO - Keputusan Cloud: Menyiram otomatis di siang hari saat tanah kering (penyiraman ditahan jika malam hari).
-                </p>
               </div>
 
               <!-- Status Pompa & Tombol Aksi Utama -->
@@ -376,7 +362,6 @@
                   </svg>
                   <span>Nyalakan Pompa Air</span>
                 </button>
-                <p class="pump-help-text" id="pumpHelp">Aktifkan mode MANUAL terlebih dahulu untuk menyiram secara manual.</p>
               </div>
             </div>
           </div>
@@ -388,7 +373,6 @@
           <div class="view-header-row">
             <div>
               <h2 class="view-screen-title">Pengaturan Ambang Sensor</h2>
-              <p class="view-screen-subtitle">Kalibrasi batas kelembapan tanah kering, tanah lembab, dan ambang intensitas cahaya.</p>
             </div>
           </div>
 
@@ -406,7 +390,6 @@
                 </div>
                 <div>
                   <h3 class="card-title">Ambang Batas Kelembapan &amp; Cahaya</h3>
-                  <p class="card-subtitle">Nilai ini menentukan kapan pompa mulai menyiram dan kapan berhenti menyiram.</p>
                 </div>
               </div>
 
@@ -424,7 +407,6 @@
                       <span>%</span>
                     </div>
                   </div>
-                  <small class="slider-hint">Pompa otomatis menyala saat kelembapan tanah &lt; batas kering.</small>
                 </div>
 
                 <!-- Slider 2: Batas Lembab -->
@@ -440,7 +422,6 @@
                       <span>%</span>
                     </div>
                   </div>
-                  <small class="slider-hint">Pompa otomatis berhenti saat kelembapan tanah mencapai batas lembab.</small>
                 </div>
 
                 <!-- Slider 3: Batas Cahaya -->
@@ -456,7 +437,6 @@
                       <span>%</span>
                     </div>
                   </div>
-                  <small class="slider-hint">Di bawah ambang ini dikategorikan malam hari (pompa tidak akan menyiram walau tanah kering).</small>
                 </div>
               </div>
 
@@ -497,7 +477,6 @@
           <div class="view-header-row">
             <div>
               <h2 class="view-screen-title">Riwayat Log Telemetri</h2>
-              <p class="view-screen-subtitle">Catatan historis data kelembapan tanah, intensitas cahaya, dan operasi pompa air.</p>
             </div>
           </div>
 
@@ -673,7 +652,6 @@
         <h3>Tambah Pot Baru</h3>
         <button type="button" class="close-modal-btn" id="closeClaimBtn">✕</button>
       </div>
-      <p class="subtitle">Masukkan kode perangkat ESP32 Anda untuk menghubungkannya ke akun ini.</p>
       <form id="claimForm">
         <label class="field-label">Kode Perangkat ESP32
           <input class="field-input" name="device_code" value="smartplant_azarya_01" maxlength="64" required placeholder="smartplant_azarya_01">
@@ -692,6 +670,9 @@
 
   <!-- Hidden Compatibility Elements (so legacy JS code never encounters undefined DOM nodes) -->
   <div style="display:none;" aria-hidden="true">
+    <span id="greetingTitle"></span>
+    <span id="modeDescription"></span>
+    <span id="pumpHelp"></span>
     <span id="summaryWaterText"></span>
     <span id="humidityValue"></span>
     <span id="activeWaterStatus"></span>
